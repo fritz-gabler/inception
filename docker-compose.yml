@@ -1,0 +1,10 @@
+services:
+  nginx:
+    image: fgabler/nginx
+    build:
+      context: ./srcs/requirements/nginx/
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "443:443"
+
+
