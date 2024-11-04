@@ -3,11 +3,15 @@
 if [ -z "$MARIADB-DATABASE" ]; then
   echo "MARIADB-DATABASE is not set"
   exit 1
-else if [ -z "$MARIADB_USER" ]; then
+elif [ -z "$MARIADB_USER" ]; then
   echo "MARIADB-DATABASE is not set"
   exit 1
-else if [ -z "$MARIADB_PASSWORD" ]; then
+elif [ -z "$MARIADB_PASSWORD" ]; then
   echo "MARIADB_PASSWORD is not set"
   exit 1
+fi
 
-
+mariadb -p $MARIADB_PASSWORD
+CREATE USER IF NOT EXISTS $MARIADB_USER IDENTIFIED BY $MARIADB_PASSWORD;
+CREATE DATABASE $$MARIADB-DATABASE;
+GRANT ALL PRIVILEGES ON *.* TO $MARIADB_USER@localhost IDENTIFIED BY $MARIADB_PASSWORD;
