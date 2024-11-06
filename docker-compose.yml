@@ -1,10 +1,16 @@
 services:
+
   nginx:
-    image: fgabler/nginx
+    image: fgabler/nginx:01
     build:
       context: ./srcs/requirements/nginx/
       dockerfile: nginx.Dockerfile
     ports:
       - "443:443"
 
-
+  mariadb:
+    image: fgabler/mariadb:01
+    build:
+      context: ./srcs/requirements/mariadb/
+      dockerfile: mariadb.Dockerfile
+    env_file: ".env"
