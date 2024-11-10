@@ -5,7 +5,7 @@ COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
 
 RUN apt-get update && \
     apt-get install -y curl && \
-    apt-get install -y php8.0 php.8.0-fpm
+    apt-get install -y php8.2 php8.2-fpm
 
 
 
