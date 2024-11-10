@@ -1,16 +1,32 @@
 services:
 
   nginx:
-    image: fgabler/nginx:01
+    image: fgabler/nginx:latest
     build:
       context: ./srcs/requirements/nginx/
       dockerfile: nginx.Dockerfile
     ports:
       - "443:443"
+    networks:
+      - inception_net
 
   mariadb:
-    image: fgabler/mariadb:01
+    image: fgabler/mariadb:latest
     build:
       context: ./srcs/requirements/mariadb/
       dockerfile: mariadb.Dockerfile
     env_file: ".env"
+    networks:
+      - inception_net
+
+  wordpress:
+    image: fgabler/wordpress:latest
+    build: 
+      context: ./srcs/requirements/wordpress
+      dockerfile: wordpress.Dockerfile
+    networks:
+      - inception_net
+
+networks:
+  inception_net:
+    driver: bridge
