@@ -5,8 +5,13 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
-wp core download
+wp core download --allow-root
 
+wp config create --dbname={$MARIADB_DATABASE} \
+  --dbuser={$MARIADB_USER} --dbpass={$MARIADB_PASSWORD} --allow-root
 
-wp core install --url=fgabler.42.fr --title=inception --admin_user=admin \
-       --admin_password=1234 --admin_email=fgabler.test@mail.com
+wp core install --url=fgabler.42.fr --title=inception \
+   --admin_user={$WP_DB_USER} --admin_password={$WP_DB_USER_PASS} \
+   --admin_email={$WP_DB_EMAIL} --allow-root
+
+tail -f
