@@ -1,15 +1,5 @@
 services:
 
-  nginx:
-    image: fgabler/nginx:latest
-    build:
-      context: ./srcs/requirements/nginx/
-      dockerfile: nginx.Dockerfile
-    ports:
-      - "443:443"
-    networks:
-      - inception_net
-
   mariadb:
     image: fgabler/mariadb:latest
     build:
@@ -26,6 +16,24 @@ services:
       dockerfile: wordpress.Dockerfile
     networks:
       - inception_net
+    depends_on:
+      mariadb:
+        condition: service_started
+
+  nginx:
+    image: fgabler/nginx:latest
+    build:
+      context: ./srcs/requirements/nginx/
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "443:443"
+    networks:
+      - inception_net
+    depends_on:
+      - wordpress
+
+
+
 
 networks:
   inception_net:
