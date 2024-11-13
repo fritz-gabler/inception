@@ -1,0 +1,59 @@
+services:
+
+  mariadb:
+    image: fgabler/mariadb:latest
+    build:
+      context: ./requirements/mariadb/
+      dockerfile: mariadb.Dockerfile
+    env_file: "../.env"
+    networks:
+      - inception_net
+#    healthcheck:
+#      test: ["CMD-SHELL", "mysqladmin", "ping", "-h", "localhost", "||", "exit"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
+
+  wordpress:
+    image: fgabler/wordpress:latest
+    build: 
+      context: ./requirements/wordpress
+      dockerfile: wordpress.Dockerfile
+    networks:
+      - inception_net
+    volumes:
+      - wp-and-ngix-vol:/var/www/html/mysite
+#    depends_on:
+#      mariadb:
+#        condition: service_healthy
+
+
+  nginx:
+    image: fgabler/nginx:latest
+    build:
+      context: ./requirements/nginx/
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "443:443"
+    networks:
+      - inception_net
+    volumes:
+      - wp-and-ngix-vol:/var/www/html/mysite
+#    depends_on:
+#      - wordpress
+
+
+
+
+networks:
+  inception_net:
+    driver: bridge
+
+volumes:
+  wp-and-ngix-vol:
+    name: 'wp-and-nginx-dir'
+    driver: local
+    driver_opts:
+      device: "wp_and_nginx_dir"
+      o: bind
+      type: none
