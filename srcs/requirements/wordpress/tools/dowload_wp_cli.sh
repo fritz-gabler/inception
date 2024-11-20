@@ -13,14 +13,27 @@ fi
 cd /var/www/html/mysite/
 
 if [ ! -f "/var/www/html/mysite/wp-config.php" ]; then
-wp config create \
+  wp config create \
   --dbname=$MARIADB_DATABASE \
   --dbuser=$MARIADB_USER \
   --dbpass=$MARIADB_PASSWORD \
   --dbhost='mariadb' \
   --allow-root \
   --path="/var/www/html/mysite/"
+
+
 fi
+
+if ! wp user exists $AUTHOR_NAME --allow-root; then
+  wp user create \
+    $AUTHOR_NAME \
+    $AUTHOR_MAIL \
+    --role=author \
+    --user_pass=$AUTHOR_PASS \
+    --allow-root
+  echo 'Author user got created'
+fi
+
 
 if ! wp core is-installed --path="/var/www/html/mysite/" --allow-root; then
   wp core install \
