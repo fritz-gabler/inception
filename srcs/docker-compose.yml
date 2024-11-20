@@ -6,7 +6,7 @@ services:
     build:
       context: ./requirements/mariadb/
       dockerfile: mariadb.Dockerfile
-    env_file: "../.env"
+    env_file: ".env"
     networks:
       - inception_net
     volumes:
@@ -20,7 +20,7 @@ services:
   wordpress:
     container_name: wordpress
     image: fgabler/wordpress:latest
-    env_file: "../.env"
+    env_file: ".env"
     build: 
       context: ./requirements/wordpress
       dockerfile: wordpress.Dockerfile
@@ -35,7 +35,7 @@ services:
   nginx:
     container_name: nginx
     image: fgabler/nginx:latest
-    env_file: "../.env"
+    env_file: ".env"
     build:
       context: ./requirements/nginx/
       dockerfile: nginx.Dockerfile
