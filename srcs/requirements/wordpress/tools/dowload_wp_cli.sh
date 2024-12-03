@@ -4,6 +4,10 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
+MARIADB_PASSWORD = $(cat /run/secrets/maria-pass)
+AUTHOR_PASS = $(cat /run/secrets/author_pass)
+WP_DB_USER_PASS = $(cat /run/secrets/wp-db-user-pass)
+
 mkdir -p /var/www/html/mysite
 
 if [ ! -f "/var/www/html/mysite/index.php" ]; then
@@ -46,5 +50,3 @@ if ! wp core is-installed --path="/var/www/html/mysite/" --allow-root; then
 fi
 
 php-fpm8.2 -F
-
-#tail -f

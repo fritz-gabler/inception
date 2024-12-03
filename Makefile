@@ -1,3 +1,5 @@
+SECRETS = secrets
+
 up:
 	mkdir -p ./srcs/wp_and_nginx_dir
 	mkdir -p ./srcs/mariadb-dir
@@ -17,3 +19,11 @@ build:
 re-d: down build up-d
 
 re: down build up
+
+secret_files:
+	touch ./$(SECRETS)/author_pass.txt
+	touch ./$(SECRETS)/maria-pass.txt
+	touch ./$(SECRETS)/wp-db-user-pass.txt
+
+rm-all:
+	docker system prune -a

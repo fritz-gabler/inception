@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM debian:bullseye
 
 COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
 
