@@ -25,5 +25,12 @@ secret_files:
 	touch ./$(SECRETS)/maria-pass.txt
 	touch ./$(SECRETS)/wp-db-user-pass.txt
 
+rm-dir:
+	@rm -rf ./srcs/wp_and_nginx_dir ./srcs/mariadb-dir
+	@echo volume directory and wp_and_nginx_dir mariadb_dir are removed now
+
+rm-vol: 
+	docker volume rm wp-and-nginx-dir mariadb-vol
+
 rm-all:
 	docker system prune -a
