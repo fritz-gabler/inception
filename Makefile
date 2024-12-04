@@ -21,6 +21,7 @@ re-d: down build up-d
 re: down build up
 
 secret_files:
+	mkdir -p secrets
 	touch ./$(SECRETS)/author_pass.txt
 	touch ./$(SECRETS)/maria-pass.txt
 	touch ./$(SECRETS)/wp-db-user-pass.txt
