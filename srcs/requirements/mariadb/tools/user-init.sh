@@ -26,7 +26,7 @@ chown -R mysql:mysql /run/mysqld/
 #  echo creaded file init.sql
 #fi
 
-cat << EOF > /tools/init.sql
+cat << EOF > /etc/mysql/init.sql
 CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';
 CREATE DATABASE IF NOT EXISTS \`${MARIADB_DATABASE}\`;
 GRANT ALL PRIVILEGES ON \`${MARIADB_DATABASE}\`.* TO '${MARIADB_USER}'@'%';
@@ -36,4 +36,4 @@ chmod 777 /etc/mysql/init.sql
 
 sed -i "s/bind-address            = 127.0.0.1/bind-address            = mariadb/g" "/etc/mysql/mariadb.conf.d/50-server.cnf"
 
-mariadbd 
+mariadbd --init-file=/etc/mysql/init.sql
