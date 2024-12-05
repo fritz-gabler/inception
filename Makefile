@@ -1,13 +1,13 @@
 SECRETS = secrets
 
 up:
-	mkdir -p ./srcs/wp_and_nginx_dir
-	mkdir -p ./srcs/mariadb-dir
+	mkdir -p /home/fgabler/data/wp_and_nginx_dir
+	mkdir -p /home/fgabler/data/mariadb-dir
 	docker compose -f ./srcs/docker-compose.yml up
 
 up-d:
-	mkdir -p ./srcs/wp_and_nginx_dir
-	mkdir -p ./srcs/mariadb-dir
+	mkdir -p /home/fgabler/data/wp_and_nginx_dir
+	mkdir -p /home/fgabler/data/mariadb-dir
 	docker compose -f ./srcs/docker-compose.yml up -d
 
 down:
@@ -28,6 +28,7 @@ secret_files:
 
 rm-dir:
 	@rm -rf ./srcs/wp_and_nginx_dir ./srcs/mariadb-dir
+	@sudo rm -rf  /home/fgabler/data/mariadb-dir  /home/fgabler/data/wp_and_nginx_dir
 	@echo volume directory and wp_and_nginx_dir mariadb_dir are removed now
 
 rm-vol: 

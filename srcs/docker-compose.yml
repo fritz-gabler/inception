@@ -70,14 +70,14 @@ volumes:
     name: 'wp-and-nginx-dir'
     driver: local
     driver_opts:
-      device: "wp_and_nginx_dir"
+      device: "/home/fgabler/data/wp_and_nginx_dir"
       o: bind
       type: none
   mariadb-vol:
     name: 'mariadb-vol'
     driver: local
     driver_opts:
-      device: "mariadb-dir"
+      device: "/home/fgabler/data/mariadb-dir"
       o: bind
       type: none
 
