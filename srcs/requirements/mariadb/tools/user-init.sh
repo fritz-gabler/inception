@@ -1,6 +1,7 @@
 #!/bin/bash
 
 MARIADB_PASSWORD=$(cat /run/secrets/maria-pass)
+SQL_ROOT_PASS=$(cat /run/secrets/sql_root_pass)
 
 if [ -z "$MARIADB_DATABASE" ]; then
   echo "MARIADB_DATABASE is not set"
@@ -30,6 +31,12 @@ cat << EOF > /etc/mysql/init.sql
 CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';
 CREATE DATABASE IF NOT EXISTS \`${MARIADB_DATABASE}\`;
 GRANT ALL PRIVILEGES ON \`${MARIADB_DATABASE}\`.* TO '${MARIADB_USER}'@'%';
+UPDATE mysql.user SET Password=PASSWORD('${SQL_ROOT_PASS}') WHERE User='root';
+DELETE FROM mysql.user WHERE User='';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+DROP DATABASE IF EXISTS test;
+DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
+FLUSH PRIVILEGES;
 EOF
 chmod 777 /etc/mysql/init.sql
 

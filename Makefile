@@ -25,6 +25,7 @@ secret_files:
 	touch ./$(SECRETS)/author_pass.txt
 	touch ./$(SECRETS)/maria-pass.txt
 	touch ./$(SECRETS)/wp-db-user-pass.txt
+	touch ./$(SECRETS)/sql_root_pass.txt
 
 rm-dir:
 	@rm -rf ./srcs/wp_and_nginx_dir ./srcs/mariadb-dir

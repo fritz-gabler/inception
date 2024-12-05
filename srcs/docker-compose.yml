@@ -88,3 +88,5 @@ secrets:
     file: ./../secrets/wp-db-user-pass.txt
   author_pass:
     file: ./../secrets/author_pass.txt
+  sql_root_pass:
+    file: ./../secrets/sql_root_pass.txt
