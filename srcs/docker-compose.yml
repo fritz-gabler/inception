@@ -12,13 +12,14 @@ services:
     volumes:
       - mariadb-vol:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p", "$(cat /run/secrets/sql-root-pass)" ]
       interval: 5s
       timeout: 5s
       retries: 3
     restart: always
     secrets:
       - maria-pass
+      - sql-root-pass
 
   wordpress:
     container_name: wordpress
@@ -88,5 +89,5 @@ secrets:
     file: ./../secrets/wp-db-user-pass.txt
   author_pass:
     file: ./../secrets/author_pass.txt
-  sql_root_pass:
+  sql-root-pass:
     file: ./../secrets/sql_root_pass.txt
