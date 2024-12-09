@@ -8,6 +8,7 @@ RUN apt-get update && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
+COPY tools/healthcheck.sh /tools/healthcheck.sh
 COPY tools/user-init.sh /tools/user-init.sh
 RUN chmod +x /tools/user-init.sh
 CMD [ "sh", "/tools/user-init.sh" ]

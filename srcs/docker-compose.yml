@@ -12,7 +12,7 @@ services:
     volumes:
       - mariadb-vol:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p", "$(cat /run/secrets/sql-root-pass)" ]
+      test: ["CMD", "bash", "/tools/healthcheck.sh"]
       interval: 5s
       timeout: 5s
       retries: 3
