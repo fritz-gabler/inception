@@ -21,11 +21,17 @@ re-d: down build up-d
 re: down build up
 
 secret_files:
-	mkdir -p secrets
-	touch ./$(SECRETS)/author_pass.txt
-	touch ./$(SECRETS)/maria-pass.txt
-	touch ./$(SECRETS)/wp-db-user-pass.txt
-	touch ./$(SECRETS)/sql_root_pass.txt
+	@mkdir -p secrets
+	@touch ./$(SECRETS)/author_pass.txt
+	@touch ./$(SECRETS)/maria-pass.txt
+	@touch ./$(SECRETS)/wp-db-user-pass.txt
+	@touch ./$(SECRETS)/sql_root_pass.txt
+	@echo "1234" > ./$(SECRETS)/author_pass.txt
+	@echo "1234" > ./$(SECRETS)/maria-pass.txt
+	@echo "1234" > ./$(SECRETS)/wp-db-user-pass.txt
+	@echo "1234" > ./$(SECRETS)/sql_root_pass.txt
+	@echo "Secret files have been created with password 1234 please change password"
+
 
 rm-dir:
 	@rm -rf ./srcs/wp_and_nginx_dir ./srcs/mariadb-dir

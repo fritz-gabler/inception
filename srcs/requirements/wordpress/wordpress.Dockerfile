@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 
-COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
+#COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
 
 RUN apt-get update && \
     apt-get install -y curl && \
