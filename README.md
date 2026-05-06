@@ -5,12 +5,12 @@ A Docker-based infrastructure project that deploys a WordPress site served over 
 ## Architecture
 
 ```
-                 ┌──────────────────────────────────────────┐
-                 │             inception_net (bridge)        │
-                 │                                          │
-  HTTPS :443 ──► │  nginx ──► wordpress (php-fpm) ──► mariadb │
-                 │                                          │
-                 └──────────────────────────────────────────┘
+                 ┌─────────────────────────────────────────────┐
+                 │             inception_net (bridge)          │
+                 │                                             │
+  HTTPS :443 ──► │  nginx ──► wordpress (php-fpm) ──► mariadb  │
+                 │                                             │
+                 └─────────────────────────────────────────────┘
 ```
 
 | Container   | Base Image       | Role                          |
